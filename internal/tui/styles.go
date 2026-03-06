@@ -9,7 +9,7 @@ import (
 
 // Color palette — inspired by lazygit/k9s
 const (
-	colorPrimary  = lipgloss.Color("#80CBC4") // light cyan/teal title
+	colorPrimary  = lipgloss.Color("#50d050") // green
 	colorWarn     = lipgloss.Color("#e5c07b") // soft yellow
 	colorDanger   = lipgloss.Color("#e06c75") // muted red
 	colorMuted    = lipgloss.Color("#5c6370") // comment gray
@@ -74,11 +74,9 @@ func tableStyles(totalWidth int) table.Styles {
 		Bold(true)
 	// No foreground on Cell — we colorize rows in postProcessTable
 	s.Cell = lipgloss.NewStyle().Padding(0, 1)
-	// Selected wraps the full joined row
+	// Selected: highlight text color only, no background
 	s.Selected = lipgloss.NewStyle().
-		Foreground(colorSelFg).
-		Background(colorSelBg).
-		Bold(true).
+		Foreground(colorPrimary).
 		Width(totalWidth)
 	return s
 }

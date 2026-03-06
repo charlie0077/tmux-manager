@@ -128,8 +128,8 @@ func (m *Model) serverListUpdate(msg tea.Msg) (Model, tea.Cmd) {
 	case sessionsLoadedMsg:
 		return m.handleSessionsLoaded(msg)
 	case tickMsg:
-		mm, cmd := m.refreshAll()
-		return mm, tea.Batch(cmd, tickCmd())
+		cmd := m.silentRefreshAll()
+		return *m, tea.Batch(cmd, tickCmd())
 	}
 
 	var cmd tea.Cmd
@@ -241,6 +241,17 @@ func (m *Model) refreshAll() (Model, tea.Cmd) {
 	}
 	m.serverTable.SetRows(m.serverRows())
 	return *m, tea.Batch(cmds...)
+}
+
+func (m *Model) silentRefreshAll() tea.Cmd {
+	var cmds []tea.Cmd
+	for i := range m.servers {
+		if m.servers[i].loading {
+			continue
+		}
+		cmds = append(cmds, m.fetchSessions(i))
+	}
+	return tea.Batch(cmds...)
 }
 
 func (m *Model) selectedServerIndex() int {

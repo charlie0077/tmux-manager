@@ -84,7 +84,6 @@ func (m *Model) sessionDetailUpdate(msg tea.Msg) (Model, tea.Cmd) {
 	case tickMsg:
 		idx := m.selectedIdx
 		if !m.servers[idx].loading {
-			m.servers[idx].loading = true
 			return *m, tea.Batch(m.fetchSessions(idx), tickCmd())
 		}
 		return *m, tickCmd()
