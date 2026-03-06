@@ -2,6 +2,7 @@ package tui
 
 import (
 	"context"
+	"time"
 
 	"github.com/charmbracelet/bubbles/table"
 	"github.com/charmbracelet/bubbles/textinput"
@@ -9,6 +10,10 @@ import (
 	"github.com/charlie0077/tmux-manager/internal/config"
 	"github.com/charlie0077/tmux-manager/internal/tmux"
 )
+
+const autoRefreshInterval = 10 * time.Second
+
+type tickMsg time.Time
 
 type viewState int
 
@@ -164,8 +169,14 @@ func NewModel(cfg *config.Config, configPath string) Model {
 	return m
 }
 
+func tickCmd() tea.Cmd {
+	return tea.Tick(autoRefreshInterval, func(t time.Time) tea.Msg {
+		return tickMsg(t)
+	})
+}
+
 func (m Model) Init() tea.Cmd {
-	var cmds []tea.Cmd
+	cmds := []tea.Cmd{tickCmd()}
 	for i := range m.servers {
 		cmds = append(cmds, m.fetchSessions(i))
 	}

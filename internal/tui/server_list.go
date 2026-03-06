@@ -127,6 +127,9 @@ func (m *Model) serverListUpdate(msg tea.Msg) (Model, tea.Cmd) {
 		return *m, nil
 	case sessionsLoadedMsg:
 		return m.handleSessionsLoaded(msg)
+	case tickMsg:
+		mm, cmd := m.refreshAll()
+		return mm, tea.Batch(cmd, tickCmd())
 	}
 
 	var cmd tea.Cmd
