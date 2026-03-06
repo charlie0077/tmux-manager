@@ -9,14 +9,14 @@ import (
 
 // Color palette — inspired by lazygit/k9s
 const (
-	colorPrimary  = lipgloss.Color("#A8B8F0") // light periwinkle blue title
+	colorPrimary  = lipgloss.Color("#80CBC4") // light cyan/teal title
 	colorWarn     = lipgloss.Color("#e5c07b") // soft yellow
 	colorDanger   = lipgloss.Color("#e06c75") // muted red
 	colorMuted    = lipgloss.Color("#5c6370") // comment gray
 	colorSubtle   = lipgloss.Color("#3e4452") // border
 	colorText     = lipgloss.Color("#e8e8e8") // near white
-	colorSelFg    = lipgloss.Color("#0a1030") // dark blue
-	colorSelBg    = lipgloss.Color("#A8B8F0") // light periwinkle blue bar
+	colorSelFg    = lipgloss.Color("#0a1e1c") // dark teal
+	colorSelBg    = lipgloss.Color("#80CBC4") // light cyan/teal bar
 	colorHeaderFg = lipgloss.Color("#828997") // dim header
 	colorBorder   = lipgloss.Color("#3e4452") // dark border
 )
