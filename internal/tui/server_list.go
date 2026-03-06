@@ -231,6 +231,9 @@ func (m *Model) handleSessionsLoaded(msg sessionsLoadedMsg) (Model, tea.Cmd) {
 func (m *Model) refreshAll() (Model, tea.Cmd) {
 	var cmds []tea.Cmd
 	for i := range m.servers {
+		if m.servers[i].loading {
+			continue
+		}
 		m.servers[i].loading = true
 		m.servers[i].err = nil
 		m.servers[i].sessions = nil

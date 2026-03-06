@@ -82,10 +82,12 @@ func (m *Model) sessionDetailUpdate(msg tea.Msg) (Model, tea.Cmd) {
 			return *m, nil
 		}
 	case tickMsg:
-		// Auto-refresh: re-fetch current server's sessions
 		idx := m.selectedIdx
-		m.servers[idx].loading = true
-		return *m, tea.Batch(m.fetchSessions(idx), tickCmd())
+		if !m.servers[idx].loading {
+			m.servers[idx].loading = true
+			return *m, tea.Batch(m.fetchSessions(idx), tickCmd())
+		}
+		return *m, tickCmd()
 	case sessionsLoadedMsg:
 		return m.handleSessionDetailLoaded(msg)
 	case sessionActionDoneMsg:
