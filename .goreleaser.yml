@@ -1,0 +1,46 @@
+version: 2
+
+project_name: tmux-manager
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: tmux-manager
+    main: ./cmd/tmux-manager
+    binary: tmux-manager
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w
+
+archives:
+  - id: binaries
+    format: binary
+    name_template: "tmux-manager_{{ .Os }}_{{ .Arch }}"
+
+checksum:
+  name_template: "checksums.txt"
+
+release:
+  github:
+    owner: charlie0077
+    name: tmux-manager
+  draft: false
+  prerelease: auto
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"

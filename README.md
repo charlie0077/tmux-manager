@@ -14,6 +14,22 @@ A TUI tool for managing tmux sessions across multiple remote servers via SSH. Al
 
 ## Install
 
+### curl (Linux & macOS)
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/charlie0077/tmux-manager/main/install.sh | sh
+```
+
+Installs the latest release binary to `/usr/local/bin/tmux-manager`.
+
+### PowerShell (Windows)
+
+```powershell
+irm https://raw.githubusercontent.com/charlie0077/tmux-manager/main/install.ps1 | iex
+```
+
+Installs to `%LOCALAPPDATA%\tmux-manager\tmux-manager.exe` and adds it to your user PATH.
+
 ### From source
 
 Requires Go 1.22+:
